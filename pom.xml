@@ -10,10 +10,10 @@
   </parent>
 
   <groupId>org.springframework.samples</groupId>
-  <artifactId>spring-petclinic</artifactId>
+  <artifactId>ado-spring-boot-app-dev</artifactId>
   <version>3.4.0-SNAPSHOT</version>
 
-  <name>petclinic</name>
+  <name>ado-spring-boot-app-dev</name>
 
   <properties>
 

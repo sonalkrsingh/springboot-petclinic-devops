@@ -75,7 +75,8 @@ stages:
               sqMavenPluginVersionChoice: "latest"
               options: "-DskipTests"
             displayName: "Running SonarQube Maven Analysis"
-          - task: sonar-buildbreaker@8
+          - task: SonarQubePublish@7
             inputs:
               SonarQube: "SonarTestToken"
+              pollingTimeoutSec: "300"  
             displayName: "SAST Job Fail or Pass"
