@@ -174,10 +174,10 @@ stages:
           - checkout: none
           - script: docker build -t sonalkumarsingh/myjavaapp:$(Build.BuildId) .
             displayName: "Create Docker Image"
-          #- script: trivy image --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml kiran2361993/myapp:$(Build.BuildId)
+          #- script: trivy image --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml sonalkumarsingh/myapp:$(Build.BuildId)
           - script: |
-              trivy image --exit-code 0 --severity LOW,MEDIUM --format template --template "@template/junit.tpl" -o junit-report-low-med.xml kiran2361993/myapp:$(Build.BuildId)
-              trivy image --exit-code 0 --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml kiran2361993/myapp:$(Build.BuildId)
+              trivy image --exit-code 0 --severity LOW,MEDIUM --format template --template "@template/junit.tpl" -o junit-report-low-med.xml sonalkumarsingh/myapp:$(Build.BuildId)
+              trivy image --exit-code 0 --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml sonalkumarsingh/myapp:$(Build.BuildId)
             displayName: "Scan Image and Create Report"
           - task: PublishTestResults@2
             inputs:
