@@ -148,18 +148,18 @@ stages:
                 az storage blob upload-batch --account-name sonalsecopsprod  --account-key $(STORAGE_ACCOUNT_KEY) --destination artifacts --source /artifacts/
             displayName: "Azure Upload artifacts to Azure Blob"
             continueOnError: true
-      # - job: CopyFilesToAWSS3Bucket
-      #   dependsOn: CopyFilesToAzureBlob
-      #   condition: always() # succeededOrFailed() or always() or failed() or succeeded()-default
-      #   timeoutInMinutes: 5
-      #   steps:
-      #     - checkout: none
-      #     - task: S3Upload@1
-      #       inputs:
-      #         awsCredentials: "saikiransecops-s3"
-      #         regionName: "us-east-1"
-      #         bucketName: "saikiransecopss3uploadprodartifacts"
-      #         sourceFolder: "/artifacts/"
-      #         globExpressions: "ROOT$(Build.BuildId).jar"
-      #       displayName: "AWS Upload artifacts to AWS S3 Bucket"
-      #       continueOnError: true
+      - job: CopyFilesToAWSS3Bucket
+        dependsOn: CopyFilesToAzureBlob
+        condition: always() # succeededOrFailed() or always() or failed() or succeeded()-default
+        timeoutInMinutes: 5
+        steps:
+          - checkout: none
+          - task: S3Upload@1
+            inputs:
+              awsCredentials: "sonalsecops-s3"
+              regionName: "us-east-1"
+              bucketName: "sonalsecopss3uploadprodartifacts"
+              sourceFolder: "/artifacts/"
+              globExpressions: "ROOT$(Build.BuildId).jar"
+            displayName: "AWS Upload artifacts to AWS S3 Bucket"
+            continueOnError: true
