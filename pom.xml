@@ -10,10 +10,10 @@
   </parent>
 
   <groupId>org.springframework.samples</groupId>
-  <artifactId>ado-spring-boot-app-dev</artifactId>
-  <version>3.4.0-SNAPSHOT</version>
+  <artifactId>spring-petclinic</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
 
-  <name>ado-spring-boot-app-dev</name>
+  <name>petclinic</name>
 
   <properties>
 
@@ -41,15 +41,12 @@
   </properties>
   <distributionManagement>
     <repository>
-      <id>central</id>
-      <name>libs-release</name>
-      <url>http://jfrog.cloudvishwakarma.in:8082/artifactory/libs-release-local</url>
+     <id>PROD-AD</id>
+     <url>https://pkgs.dev.azure.com/PROD-AD/_packaging/PROD-AD/maven/v1</url>
     </repository>
-
     <snapshotRepository>
-      <id>snapshots</id>
-      <name>libs-snapshot</name>
-      <url>http://jfrog.cloudvishwakarma.in:8082/artifactory/libs-snapshot-local</url>
+      <id>PROD-AD</id>
+      <url>https://pkgs.dev.azure.com/PROD-AD/_packaging/PROD-AD/maven/v1</url>
     </snapshotRepository>
   </distributionManagement>
 
@@ -298,6 +295,9 @@
         <?m2e ignore?>
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
+        <configuration>
+          <skip>true</skip> <!-- Disable CycloneDX generation -->
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
