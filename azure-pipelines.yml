@@ -163,3 +163,37 @@ stages:
               globExpressions: "ROOT$(Build.BuildId).jar"
             displayName: "AWS Upload artifacts to AWS S3 Bucket"
             continueOnError: true
+  - stage: DockerBuildAndTrivyScan
+    condition: and(succeeded(), eq(variables.isDev, true))
+    pool:
+      name: LinuxAgentPool
+    jobs:
+      - job: BuildingContainerImageAndSecurityScanning
+        timeoutInMinutes: 10
+        steps:
+          - checkout: none
+          - script: docker build -t kiran2361993/myapp:$(Build.BuildId) .
+            displayName: "Create Docker Image"
+          #- script: trivy image --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml kiran2361993/myapp:$(Build.BuildId)
+          - script: |
+              trivy image --exit-code 0 --severity LOW,MEDIUM --format template --template "@template/junit.tpl" -o junit-report-low-med.xml kiran2361993/myapp:$(Build.BuildId)
+              trivy image --exit-code 0 --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml kiran2361993/myapp:$(Build.BuildId)
+            displayName: "Scan Image and Create Report"
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: "JUnit"
+              testResultsFiles: "**/junit-report-low-med.xml"
+              mergeTestResults: true
+              failTaskOnFailedTests: false
+              testRunTitle: "Trivy - Low and Medium Vulnerabilities"
+            displayName: "Trivy - Low and Medium Vulnerabilities"
+            condition: "always()"
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: "JUnit"
+              testResultsFiles: "**/junit-report-high-crit.xml"
+              mergeTestResults: true
+              failTaskOnFailedTests: false
+              testRunTitle: "Trivy - High and Critical Vulnerabilities"
+            displayName: "Trivy - High and Critical Vulnerabilities"
+            condition: "always()"
