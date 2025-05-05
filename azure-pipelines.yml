@@ -90,7 +90,7 @@ stages:
         - Terraform -equals Yes
     jobs:
       - job: BuildingJavaCodeJob
-        timeoutInMinutes: 5
+        timeoutInMinutes: 15
         steps:
           - script: ls -al && pwd && rm -rf /home/adminsonal/.m2/settings.xml
             displayName: "List Files & Current Working Directory"
@@ -197,3 +197,38 @@ stages:
               testRunTitle: "Trivy - High and Critical Vulnerabilities"
             displayName: "Trivy - High and Critical Vulnerabilities"
             condition: "always()"
+  - stage: BuildDockerImagePushToAzureACRAndDockerHub
+    condition: and(succeeded(), eq(variables.isDev, true))
+    jobs:
+      - job: PushToAzureACR
+        #dependsOn: DockerBuildAndTrivyScan
+        condition: always() # succeededOrFailed() or always() or failed()
+        timeoutInMinutes: 5
+        steps:
+          - checkout: none
+          - task: Bash@3
+            inputs:
+              targetType: "inline"
+              script: |
+                docker login -u devsopsacrtest -p $(acrpassword) devsopsacrtest.azurecr.io
+                docker tag sonalkumarsingh/myapp:$(Build.BuildId) devsopsacrtest.azurecr.io/devsecopsacrtest:$(Build.BuildId)
+                docker push devsopsacrtest.azurecr.io/devsecopsacrtest:$(Build.BuildId)
+            displayName: "Creating & Pushing Docker Image To Azure ACR"
+      # - job: PushToDockerHub
+      #   dependsOn: PushToAzureACR
+      #   condition: always() # succeededOrFailed() or always() or failed()
+      #   timeoutInMinutes: 5
+      #   steps:
+      #     - checkout: none
+      #     - task: Docker@2
+      #       inputs:
+      #         containerRegistry: "devops-dockerhub-connection"
+      #         command: "login"
+      #       displayName: "Login To Docker Hub"
+      #     - task: Bash@3
+      #       inputs:
+      #         targetType: "inline"
+      #         script: |
+      #           docker tag sonalkumarsingh/myapp:$(Build.BuildId) sonalkumarsingh/devsecopsado:$(Build.BuildId)
+      #           docker push sonalkumarsingh/devsecopsado:$(Build.BuildId)
+      #       displayName: "Pushing Docker Image To Docker Hub"
