@@ -114,9 +114,9 @@ stages:
           - script: mvn deploy && ls -al
             displayName: "Run the maven deploy"
             continueOnError: true
-            # env:
+            # env:  
             #   AZURE_DEVOPS_PAT: $(System.AccessToken)
-          - script: ls -al && cp /home/adminsonal/myagent/_work/1/s/target/ado-spring-boot-app-dev-Dev-2.0.$(Build.BuildId).jar ROOT$(Build.BuildId).jar && ls -al
+          - script: ls -al && cp /home/adminsonal/myagent/_work/1/s/target/spring-petclinic-Dev-2.0.$(Build.BuildId).jar ROOT$(Build.BuildId).jar && ls -al
             displayName: "List Files & Rename ROOT.jar"
           - script: rm -rf /artifacts/*.jar && cp ROOT$(Build.BuildId).jar /artifacts && ls -al /artifacts
             displayName: "Copy Artifact To Folder"
