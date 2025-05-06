@@ -299,7 +299,7 @@ stages:
 
   - stage: "DeployingToProdEnvironment"
     dependsOn: BuildAndPushToAzureArtifacts
-    condition: and(succeeded(), (eq(variables.isProd, true)
+    condition: and(succeeded(), (eq(variables.isProd, true))
     #condition: and(succeeded('BuildingJavaCodeWithMavenCopyToJFrog'), eq(variables.isProd, true))
     pool:
       name: LinuxAgentPool
