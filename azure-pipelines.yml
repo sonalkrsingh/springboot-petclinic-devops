@@ -235,7 +235,7 @@ stages:
   - stage: DeployDockerImageToAzureACI
     condition: and(succeeded(), eq(variables.isDev, true))
     pool:
-      name: ProdAgentPool
+      name: LinuxAgentPool
       demands:
         - JDK -equals 17
     jobs:
