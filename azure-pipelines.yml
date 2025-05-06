@@ -176,8 +176,8 @@ stages:
             displayName: "Create Docker Image"
           #- script: trivy image --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml sonalkumarsingh/myapp:$(Build.BuildId)
           - script: |
-              trivy image --exit-code 0 --severity LOW,MEDIUM --format template --template "@template/junit.tpl" -o junit-report-low-med.xml sonalkumarsingh/myapp:$(Build.BuildId)
-              trivy image --exit-code 0 --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml sonalkumarsingh/myapp:$(Build.BuildId)
+              trivy image --exit-code 0 --severity LOW,MEDIUM --format template --template "@template/junit.tpl" -o junit-report-low-med.xml sonalkumarsingh/myjavaapp:$(Build.BuildId)
+              trivy image --exit-code 0 --severity HIGH,CRITICAL --format template --template "@template/junit.tpl" -o junit-report-high-crit.xml sonalkumarsingh/myjavaapp:$(Build.BuildId)
             displayName: "Scan Image and Create Report"
           - task: PublishTestResults@2
             inputs:
@@ -197,38 +197,38 @@ stages:
               testRunTitle: "Trivy - High and Critical Vulnerabilities"
             displayName: "Trivy - High and Critical Vulnerabilities"
             condition: "always()"
-  - stage: BuildDockerImagePushToAzureACRAndDockerHub
-    condition: and(succeeded(), eq(variables.isDev, true))
-    jobs:
-      - job: PushToAzureACR
-        #dependsOn: DockerBuildAndTrivyScan
-        condition: always() # succeededOrFailed() or always() or failed()
-        timeoutInMinutes: 5
-        steps:
-          - checkout: none
-          - task: Bash@3
-            inputs:
-              targetType: "inline"
-              script: |
-                docker login -u devsopsacrtest -p $(acrpassword) devsopsacrtest.azurecr.io
-                docker tag sonalkumarsingh/myapp:$(Build.BuildId) devsopsacrtest.azurecr.io/devsecopsacrtest:$(Build.BuildId)
-                docker push devsopsacrtest.azurecr.io/devsecopsacrtest:$(Build.BuildId)
-            displayName: "Creating & Pushing Docker Image To Azure ACR"
-      # - job: PushToDockerHub
-      #   dependsOn: PushToAzureACR
-      #   condition: always() # succeededOrFailed() or always() or failed()
-      #   timeoutInMinutes: 5
-      #   steps:
-      #     - checkout: none
-      #     - task: Docker@2
-      #       inputs:
-      #         containerRegistry: "devops-dockerhub-connection"
-      #         command: "login"
-      #       displayName: "Login To Docker Hub"
-      #     - task: Bash@3
-      #       inputs:
-      #         targetType: "inline"
-      #         script: |
-      #           docker tag sonalkumarsingh/myapp:$(Build.BuildId) sonalkumarsingh/devsecopsado:$(Build.BuildId)
-      #           docker push sonalkumarsingh/devsecopsado:$(Build.BuildId)
-      #       displayName: "Pushing Docker Image To Docker Hub"
+  # - stage: BuildDockerImagePushToAzureACRAndDockerHub
+  #   condition: and(succeeded(), eq(variables.isDev, true))
+  #   jobs:
+  #     - job: PushToAzureACR
+  #       #dependsOn: DockerBuildAndTrivyScan
+  #       condition: always() # succeededOrFailed() or always() or failed()
+  #       timeoutInMinutes: 5
+  #       steps:
+  #         - checkout: none
+  #         - task: Bash@3
+  #           inputs:
+  #             targetType: "inline"
+  #             script: |
+  #               docker login -u devsopsacrtest -p $(acrpassword) devsopsacrtest.azurecr.io
+  #               docker tag sonalkumarsingh/myapp:$(Build.BuildId) devsopsacrtest.azurecr.io/devsecopsacrtest:$(Build.BuildId)
+  #               docker push devsopsacrtest.azurecr.io/devsecopsacrtest:$(Build.BuildId)
+  #           displayName: "Creating & Pushing Docker Image To Azure ACR"
+  #     - job: PushToDockerHub
+  #       dependsOn: PushToAzureACR
+  #       condition: always() # succeededOrFailed() or always() or failed()
+  #       timeoutInMinutes: 5
+  #       steps:
+  #         - checkout: none
+  #         - task: Docker@2
+  #           inputs:
+  #             containerRegistry: "devops-dockerhub-connection"
+  #             command: "login"
+  #           displayName: "Login To Docker Hub"
+  #         - task: Bash@3
+  #           inputs:
+  #             targetType: "inline"
+  #             script: |
+  #               docker tag sonalkumarsingh/myapp:$(Build.BuildId) sonalkumarsingh/devsecopsado:$(Build.BuildId)
+  #               docker push sonalkumarsingh/devsecopsado:$(Build.BuildId)
+  #           displayName: "Pushing Docker Image To Docker Hub"
