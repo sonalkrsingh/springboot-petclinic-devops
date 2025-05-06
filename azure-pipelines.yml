@@ -286,7 +286,7 @@ stages:
           # Pull the OWASP ZAP image and run the baseline scan
           - script: |
               docker pull ghcr.io/zaproxy/zaproxy:stable
-              docker run -u 0 -v $(Pipeline.Workspace)/owaspzap:/zap/wrk/:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://staging.cloudvishwakarma.in:8080/ -J report.json -r report.html -I -i
+              docker run -u 0 -v $(Pipeline.Workspace)/owaspzap:/zap/wrk/:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://13.232.77.118:8080/ -J report.json -r report.html -I -i
             displayName: "DAST Staging Environment"
             continueOnError: true
 
