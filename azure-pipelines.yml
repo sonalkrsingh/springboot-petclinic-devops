@@ -94,19 +94,10 @@ stages:
         steps:
           - script: ls -al && pwd && rm -rf /home/adminsonal/.m2/settings.xml
             displayName: "List Files & Current Working Directory"
-          # - task: DownloadSecureFile@1
-          #   name: DownloadMavenSettings
-          #   inputs:
-          #     secureFile: "settings.xml"
           - task: MavenAuthenticate@0
             inputs:
               artifactsFeeds: 'PROD-AD'  #feed name
               mavenServiceConnections: '' 
-          # - task: CopyFiles@2
-          #   inputs:
-          #     SourceFolder: "$(Agent.TempDirectory)"
-          #     Contents: "**"
-          #     TargetFolder: "/home/adminsai/.m2"
           - script: mvn versions:set -DnewVersion=Dev-2.0.$(Build.BuildId)
             displayName: "Set Maven Build Version"
           - script: mvn clean package install && ls -al
@@ -253,7 +244,7 @@ stages:
             displayName: "Deploy Docker Image to Azure Container Instances"
             continueOnError: true
   - stage: "DeployingToStagingEnvironment"
-    dependsOn: BuildingJavaCodeWithMavenCopyToJFrog
+    dependsOn: BuildAndPushToAzureArtifacts
     condition: and(succeeded(), eq(variables.isDev, true))
     pool:
       name: LinuxAgentPool
