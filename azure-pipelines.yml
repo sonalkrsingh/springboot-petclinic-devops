@@ -232,3 +232,23 @@ stages:
                 docker tag sonalkumarsingh/myjavaapp:$(Build.BuildId) sonalkumarsingh/devsecopsado:$(Build.BuildId)
                 docker push sonalkumarsingh/devsecopsado:$(Build.BuildId)
             displayName: "Pushing Docker Image To Docker Hub"
+  - stage: DeployDockerImageToAzureACI
+    condition: and(succeeded(), eq(variables.isDev, true))
+    pool:
+      name: ProdAgentPool
+      demands:
+        - JDK -equals 17
+    jobs:
+      - job: DeployAzureACI
+        timeoutInMinutes: 10
+        steps:
+          - checkout: none
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: "Azure subscription 1"
+              scriptType: "bash"
+              scriptLocation: "inlineScript"
+              inlineScript: "az container create -g Prod_ADO-1 --name devsecopsado$(Build.BuildId) --image devsopsacrtest.azurecr.io/devsecopsacrtest:$(Build.BuildId) --cpu 2 --memory 4 --ports 8080 --dns-name-label devsecopsado$(Build.BuildId) --registry-username devsopsacrtest --registry-password $(acrpassword) --location eastus --os-type Linux"
+              #inlineScript: az group list
+            displayName: "Deploy Docker Image to Azure Container Instances"
+            continueOnError: true
