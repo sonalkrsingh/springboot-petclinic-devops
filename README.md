@@ -1,6 +1,5 @@
-
-# Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)[![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml)
 # Prod-SpringBoot-Pet-App 🚀  
+[![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)[![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml)
 [![Azure DevOps CI/CD](https://img.shields.io/badge/Azure%20DevOps-CI%2FCD-blue?logo=azure-devops)](https://azure.microsoft.com/en-us/services/devops/)
 [![Java](https://img.shields.io/badge/Java-17-red?logo=java)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green?logo=spring-boot)](https://spring.io/projects/spring-boot)
@@ -15,9 +14,11 @@
 
 This repository demonstrates a complete **CI/CD pipeline** implementation using **Azure DevOps**, covering phases from code integration to secure deployment, aligned with DevSecOps best practices.
 
-> 🛠️ Forked & built upon the original work by [mentor name or repo if you want to credit], but executed, customized, and deployed fully by me.
-
 ---
+
+## 🏗️ Application Architecture
+
+![Application Architecture](./petclinic_app_architecture.jpg)
 
 ## 📌 Project Goals
 
