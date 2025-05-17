@@ -130,11 +130,11 @@ Illustrates test coverage for the application integrated with Jenkins CI/CD.
 ### 📁 Azure Resource Groups
 Snapshot of logical groupings of Azure resources used in the project.
 
-![Azure Resource Groups](src/azure-resource-groups.jpeg)
+![Azure Resource Groups](src/resource-visualizer.jpeg)
 
 ---
 
 ### 📱 Project Update (Optional)
 A quick communication or observation related to deployment/CI in progress.
 
-![WhatsApp Screenshot](src/whatsapp-screenshot.jpeg)
+![WhatsApp Screenshot](src/landingPage.jpeg)
