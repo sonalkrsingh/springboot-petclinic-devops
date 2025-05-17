@@ -18,7 +18,7 @@ This repository demonstrates a complete **CI/CD pipeline** implementation using 
 
 ## 🏗️ Application Architecture
 
-![Application Architecture](petclinic_app_architecture.jpg)
+![Application Architecture](src/petclininc_app_architecture.jpg)
 
 ## 📌 Project Goals
 
