@@ -1,3 +1,5 @@
+# Spring PetClinic Sample Application
+
 ```mermaid
 graph TD
     A[Azure Repo for Tomcat App] --> B[SAST by SonarQube]
@@ -13,7 +15,6 @@ graph TD
     H --> I1[AWS Dev Tomcat Deploy]
     H --> I2[AWS STAG Tomcat Deploy]
     H --> I3[Prod Release Pipeline]
-```mermaid
 
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)[![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml)
 
