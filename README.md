@@ -107,9 +107,34 @@ This repository demonstrates a complete **CI/CD pipeline** implementation using 
 
 ## 📂 Folder Structure
 
-
-
 ## Understanding the Spring Petclinic application with a few diagrams
 
 <img width="1042" alt="petclinic-screenshot" src="https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png">
 
+## 📸 Project Visuals
+
+### 🔷 Azure Resource Visualizer for Pet Clinic App
+Shows the high-level Azure architecture used to deploy the Spring Pet Clinic app.
+
+![Azure Resource Visualizer](images/resource-visualizer.jpeg)
+
+---
+
+### ✅ Jenkins Test Coverage
+Illustrates test coverage for the application integrated with Jenkins CI/CD.
+
+![Jenkins Test Coverage](images/jenkins-test-coverage.jpeg)
+
+---
+
+### 📁 Azure Resource Groups
+Snapshot of logical groupings of Azure resources used in the project.
+
+![Azure Resource Groups](images/azure-resource-groups.jpeg)
+
+---
+
+### 📱 Project Update (Optional)
+A quick communication or observation related to deployment/CI in progress.
+
+![WhatsApp Screenshot](images/whatsapp-screenshot.jpeg)
