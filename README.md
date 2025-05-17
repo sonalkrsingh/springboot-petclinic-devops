@@ -1,20 +1,3 @@
-# Spring PetClinic Sample Application
-
-```mermaid
-graph TD
-    A[Azure Repo for Tomcat App] --> B[SAST by SonarQube]
-    B --> C[Maven Build]
-    C --> D1[Upload WAR to AWS S3]
-    C --> D2[Upload WAR to Azure Blob]
-    C --> D3[Push Artifacts to JFrog]
-    D3 --> E[Create Docker Image from WAR]
-    E --> F1[Push to DockerHub]
-    E --> F2[Push to Azure Container Registry]
-    F2 --> G[Deploy to ACI]
-    G --> H[Approval & Gates]
-    H --> I1[AWS Dev Tomcat Deploy]
-    H --> I2[AWS STAG Tomcat Deploy]
-    H --> I3[Prod Release Pipeline]
 
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)[![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml)
 
