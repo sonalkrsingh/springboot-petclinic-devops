@@ -115,11 +115,6 @@ This repository demonstrates a complete **CI/CD pipeline** implementation using 
 
 ## 📸 Project Visuals
 
-### 🔷 Azure Resource Visualizer for Pet Clinic App
-Shows the high-level Azure architecture used to deploy the Spring Pet Clinic app.
-
-![Azure Resource Visualizer](src/resource-visualizer.jpeg)
-
 ---
 
 ### ✅ Jenkins Test Coverage
